@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.janaldous.todolist.entity.Task;
 
 @Repository
-public class TaskJdbcRepository {
+public class TaskRepository {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	

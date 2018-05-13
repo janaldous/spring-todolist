@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class WelcomeController {
 	
 	@Value("${application.message:Hello World}")
-	private String message = "Hello World";
+	private String message;
 	
 	@RequestMapping("/foo")
 	public String foo(Map<String, Object> model) {
@@ -25,7 +25,8 @@ public class WelcomeController {
 	}
 	
 	@RequestMapping("/hello")
-    public String hello(Model model, @RequestParam(value="name", required=false, defaultValue="World") String name) {
+    public String hello(Model model, 
+    		@RequestParam(value="name", required=false, defaultValue="World") String name) {
         model.addAttribute("name", name);
         return "hello";
     }

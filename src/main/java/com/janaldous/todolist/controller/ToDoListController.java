@@ -16,9 +16,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.example.demo.data.TaskListService;
 import com.janaldous.todolist.entity.Task;
-import com.janaldous.todolist.repository.TaskJdbcRepository;
+import com.janaldous.todolist.repository.TaskRepository;
 
 @Controller
 @RequestMapping("todolist")
@@ -28,7 +27,7 @@ public class ToDoListController {
 	 * Repo for lists
 	 */
 	@Autowired
-	TaskJdbcRepository repository;
+	TaskRepository repository;
 	
 	/**
 	 * @param model
@@ -47,17 +46,15 @@ public class ToDoListController {
     }
     
     @RequestMapping(value = "/task", method = RequestMethod.POST)
-    public RedirectView submitTask(@ModelAttribute Task task, 
-    		WebRequest request, SessionStatus status) {
-    	TaskListService.addTask(task);
-    	status.setComplete();
-        request.removeAttribute("task", WebRequest.SCOPE_SESSION);
+    public RedirectView submitTask(@ModelAttribute Task task) {
+    	repository.insert(task);
+
         return new RedirectView("list");
     }
     
     @RequestMapping(value = "delete", method = RequestMethod.GET)
-    public void deleteTask(@RequestParam("id") int id) {
-    	TaskListService.deleteTask(id);
+    public void deleteTask(@RequestParam("id") long id) {
+    	repository.deleteById(id);
     }
     
     @RequestMapping(value = "edit", method = RequestMethod.GET)

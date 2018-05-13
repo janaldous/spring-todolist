@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.janaldous.todolist.entity.Student;
 
 @Repository
-public class StudentJdbcRepository {
+public class StudentList {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
