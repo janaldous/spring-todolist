@@ -1,4 +1,4 @@
-package com.example.other;
+package com.janaldous.todolist.controller;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;

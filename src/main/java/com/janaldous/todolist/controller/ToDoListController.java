@@ -1,4 +1,4 @@
-package com.example.demo.todolist;
+package com.janaldous.todolist.controller;
 
 import javax.validation.Valid;
 
@@ -16,9 +16,9 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.example.demo.data.Task;
-import com.example.demo.data.TaskJdbcRepository;
 import com.example.demo.data.TaskListService;
+import com.janaldous.todolist.entity.Task;
+import com.janaldous.todolist.repository.TaskJdbcRepository;
 
 @Controller
 @RequestMapping("todolist")

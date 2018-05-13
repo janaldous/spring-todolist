@@ -1,4 +1,4 @@
-package com.example.demo.data;
+package com.janaldous.todolist.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

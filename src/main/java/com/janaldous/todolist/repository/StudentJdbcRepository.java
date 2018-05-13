@@ -1,4 +1,4 @@
-package com.example.student;
+package com.janaldous.todolist.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import com.janaldous.todolist.entity.Student;
 
 @Repository
 public class StudentJdbcRepository {

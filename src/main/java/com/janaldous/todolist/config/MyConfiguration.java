@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.janaldous.todolist.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;

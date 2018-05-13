@@ -1,4 +1,4 @@
-package com.example.student;
+package com.janaldous.todolist.entity;
 
 
 public class Student {
