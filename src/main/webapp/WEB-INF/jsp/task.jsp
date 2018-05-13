@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>New Task</h1>
-    <form action = "/task" method = "POST">
+    <form action = "task" method = "POST">
     Name: <input type = "text" name = "name" value="${task.name}">
     <br>
     Description: <input type = "text" name = "description" value="${task.description}"/>

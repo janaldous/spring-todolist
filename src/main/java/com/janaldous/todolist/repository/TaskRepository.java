@@ -44,8 +44,8 @@ public class TaskRepository {
 	}
 
 	public int insert(Task task) {
-		return jdbcTemplate.update("insert into task (id, name, description, done) " + "values(?, ?, ?, ?)",
-				new Object[] { task.getId(), task.getName(), task.getDescription(), task.isDone() });
+		return jdbcTemplate.update("insert into task (name, description, done) " + "values(?, ?, ?)",
+				new Object[] { task.getName(), task.getDescription(), task.isDone() });
 	}
 
 	public int update(Task task) {

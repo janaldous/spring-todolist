@@ -24,35 +24,45 @@ import com.janaldous.todolist.repository.TaskRepository;
 public class ToDoListController {
 	
 	/**
-	 * Repo for lists
+	 * Repository for a to do list
 	 */
 	@Autowired
 	TaskRepository repository;
 	
 	/**
+	 * Home page showing list of all tasks
 	 * @param model
-	 * @return
+	 * @return JSP filename
 	 */
-	@RequestMapping("/list")
+	@RequestMapping(value = "/")
 	public String listTasks(Model model) {
 		model.addAttribute("taskList", repository.findAll());
+		
 		return "list";
 	}
 	
+	/**
+	 * 
+	 * @param model
+	 * @param task
+	 * @return
+	 */
 	@RequestMapping(value = "/task", method = RequestMethod.GET)
-    public String taskForm(Model model, @ModelAttribute("task") Task task) {
+    public String addTask(Model model, @ModelAttribute("task") Task task) {
         model.addAttribute("task", task);
+        
         return "task";
     }
     
     @RequestMapping(value = "/task", method = RequestMethod.POST)
-    public RedirectView submitTask(@ModelAttribute Task task) {
+    public RedirectView submitNewTask(@ModelAttribute Task task) {
     	repository.insert(task);
 
-        return new RedirectView("list");
+        return new RedirectView("");
     }
     
     @RequestMapping(value = "delete", method = RequestMethod.GET)
+    @ResponseBody
     public void deleteTask(@RequestParam("id") long id) {
     	repository.deleteById(id);
     }
@@ -61,11 +71,12 @@ public class ToDoListController {
     public ModelAndView editTask(@ModelAttribute("task") Task task, 
     		@RequestParam("id") long id, Model model) {
     	task = repository.findById(id);
+    	
     	return new ModelAndView("edit", "task", task);
     }
     
     @RequestMapping(value = "editTask", method = RequestMethod.POST)
-    public String editTaskPost(@Valid @ModelAttribute("task") Task task,
+    public String submitEditTask(@Valid @ModelAttribute("task") Task task,
     		BindingResult result, WebRequest request, SessionStatus status) {
     	  	
     	if(result.hasErrors()) {
@@ -74,12 +85,13 @@ public class ToDoListController {
     	System.out.println(task.getId());
     	repository.update(task);
     	
-    	return "redirect:list";
+    	return "redirect:";
     }
     
     @RequestMapping(value= "done", method = RequestMethod.GET)
     @ResponseBody
-    public void doneTask(@RequestParam("id") long id, @RequestParam("done") boolean done) {
+    public void markDoneTask(@RequestParam("id") long id, @RequestParam("done") boolean done) {
     	repository.markDone(id, done);
+    	System.out.println("marked done - " +  id);
     }
 }
