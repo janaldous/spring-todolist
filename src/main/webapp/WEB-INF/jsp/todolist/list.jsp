@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <html lang="en">
 
@@ -9,23 +10,16 @@
 		.stroked { text-decoration: line-through; }
 	</style>
 	
-	<%@ include file="scripts/head-css.jsp" %>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-      <a class="navbar-brand" href="">Todolist</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+
+<%@ include file="../todolist/navbar.jsp" %>
 	
 	<main role="main" class="container">
 		<h1>To do list</h1>
@@ -34,8 +28,8 @@
 	           <li class="<c:if test="${task.done}">stroked</c:if>" id="${task.id}">
 	           		<input type="checkbox" class="done" <c:if test="${task.done}">checked</c:if>>
 	           		<span class="task-name">${task.name}</span> 
-	           		<span class="edit glyphicon glyphicon-pencil">Edit</span> 
-	           		<span class="delete glyphicon glyphicon-remove">Delete</span>
+	           		<span class="edit"><span class="glyphicon glyphicon-pencil"></span></span></span> 
+	           		<span class="delete"><span class="glyphicon glyphicon-remove"></span></span>
 	           		<!-- <ul class="task-description">
 	           			<li>${task.description}</li>
 	           		</ul> -->
@@ -46,61 +40,6 @@
 		<button type="button" class="btn btn-primary" id="add-task">Add task</button>
 	</main>
 	
-	<%@ include file="scripts/bottom-scripts.jsp" %>
-	<script type="text/javascript">
-		$("li > .delete").click(function() {
-			var $task = $(this).parent();
-			
-			$.ajax({
-				url: "delete",
-				type: "get",
-				contentType: "application/json",
-				data: {
-					id: $task.attr('id'),
-				},
-				success: function() {
-					$task.fadeOut();
-				},
-				error: function(e) {
-					console.log(e.responseText);
-				}
-			});
-		});
-		
-		$(".done").click(function() {
-			$task = $(this).parent();
-			
-			$.ajax({
-				url: "done",
-				type: "get",
-				contentType: "application/json",
-				data: {
-					id: $task.attr('id'),
-					done: !$task.hasClass("stroked"),
-				},
-				success: function() {
-					$task.toggleClass('stroked');
-				},
-				error: function(e) {
-					console.log(e.responseText);
-				}
-			});
-		});
-		
-		$( ".edit" ).click(function() {
-			window.location.href = "edit?id=" + $(this).parent().attr('id');
-		});
-		
-		$(".task-name").click(function() {
-			
-		});
-		
-		$("button#add-task").click(function () {
-			window.location.href = "task";
-		});
-	</script>
+	<script src="js/list.js"></script>
 	
-	
-</body>
-
-</html>
+<%@ include file="../scripts/bottom.jsp" %>

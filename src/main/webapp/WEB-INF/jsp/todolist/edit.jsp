@@ -1,11 +1,6 @@
-<%@taglib uri = "http://www.springframework.org/tags/form" prefix = "form"%>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>Getting Started: Handling Form Submission</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-</head>
-<body>
+<%@ include file="../scripts/top.jsp" %>
+
+<main role="main" class="container">
 	<h1>Edit Task</h1>
     <form:form action = "editTask" modelAttribute="task" method = "post">
    		<form:hidden path="id"/>
@@ -19,5 +14,6 @@
 	    <br>
 	    <input type = "submit" value = "Submit" />
     </form:form>
-</body>
-</html>
+</main>
+
+<%@ include file="../scripts/bottom.jsp" %>

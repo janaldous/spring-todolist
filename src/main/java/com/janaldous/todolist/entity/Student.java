@@ -1,7 +1,13 @@
 package com.janaldous.todolist.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
 public class Student {
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String name;
 	private String passportNumber;
@@ -49,7 +55,8 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return String.format("Student [id=%s, name=%s, passportNumber=%s]", id, name, passportNumber);
+		return String.format("Student [id=%s, name=%s, passportNumber=%s]", 
+				id, name, passportNumber);
 	}
 
 }

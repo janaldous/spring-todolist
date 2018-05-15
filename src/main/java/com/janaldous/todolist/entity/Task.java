@@ -1,9 +1,16 @@
 package com.janaldous.todolist.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
 public class Task {
-	private long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 	@NotEmpty
 	private String name;
 	private String description;
@@ -46,11 +53,11 @@ public class Task {
 		done = !done;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long l) {
+	public void setId(Long l) {
 		this.id = l;
 	}
 }
